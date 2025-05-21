@@ -136,11 +136,13 @@ class _IncomeRecordsScreenState extends State<IncomeRecordsScreen> {
                     controller: amountController,
                     decoration: InputDecoration(
                       labelText: 'Amount (₱)',
-                      hintText: 'Example: 1,000 or 1000',
+                      hintText: 'Example: 1,000.50 or 1000',
                     ),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'^[0-9,]*$')),
+                      FilteringTextInputFormatter.allow(
+                        RegExp(r'^\d{0,3}(,\d{3})*(\.\d{0,2})?$|^\d+(\.\d{0,2})?$'),
+                      ),
                     ],
                     validator: (value) {
                       if (value == null || value.isEmpty) {
